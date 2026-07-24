@@ -1,0 +1,3 @@
+import Link from "next/link";
+import { PublicShell } from "./components/PublicShell";
+export default function NotFound(){return <PublicShell><section className="page-hero" style={{minHeight:"65vh",display:"grid",alignItems:"center"}}><div className="shell"><p className="eyebrow">404 / Not found</p><h1>Wrong turn.</h1><p>The page or vehicle you requested is unavailable, unpublished or no longer at this address.</p><div className="hero-actions"><Link className="button" href="/stock">View current stock →</Link><Link className="button button-secondary" href="/">Return home</Link></div></div></section></PublicShell>}
