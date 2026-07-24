@@ -47,7 +47,7 @@ const worker = {
     secured.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
     secured.headers.set("X-Frame-Options", "SAMEORIGIN");
     secured.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
-    secured.headers.set("Content-Security-Policy", "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.resend.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'");
+    secured.headers.set("Content-Security-Policy", "default-src 'self'; img-src 'self' data: blob: https://cdn.images.stock.i-motor.net.au; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://api.resend.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'");
     if (url.pathname.startsWith("/admin") || url.pathname.startsWith("/api/admin")) {
       secured.headers.set("X-Robots-Tag", "noindex, nofollow");
       secured.headers.set("Cache-Control", "no-store");

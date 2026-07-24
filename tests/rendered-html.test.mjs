@@ -28,6 +28,10 @@ test("server-renders the finished Betts Works homepage", async () => {
   const response = await fetch(origin);
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+  assert.match(
+    response.headers.get("content-security-policy") ?? "",
+    /img-src[^;]*https:\/\/cdn\.images\.stock\.i-motor\.net\.au/,
+  );
   const html = await response.text();
   assert.match(html, /American trucks\./);
   assert.match(html, /Australian roads\./);
@@ -36,6 +40,8 @@ test("server-renders the finished Betts Works homepage", async () => {
   assert.match(html, /Exact SCD Direct stock/i);
   assert.match(html, /2025 Ford F350 Lariat/i);
   assert.match(html, /\$259,000/);
+  assert.match(html, /\/brand\/bw-hex-dark\.png/);
+  assert.doesNotMatch(html, /_vinext\/image/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
