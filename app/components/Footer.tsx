@@ -16,6 +16,7 @@ export function Footer() {
         <span><b>QLD motor dealer licence</b> {siteConfig.motorDealerLicence}</span>
         <span><b>Trading</b> {siteConfig.hours}</span>
       </div>
+      <div className="analytics-notice shell"><span>This site uses essential security storage and privacy-focused, cookieless Cloudflare Web Analytics. No advertising or marketing cookies are used.</span><Link href="/privacy">Privacy details</Link></div>
       <div className="footer-bottom shell"><span>© {new Date().getFullYear()} Betts Works. All rights reserved.</span><span>Queensland, Australia</span></div>
     </footer>
   );

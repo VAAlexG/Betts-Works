@@ -244,7 +244,9 @@ img { display:block; max-width:100%; }
 .footer-grid a:hover { color:var(--gold-2); }
 .footer-compliance { display:flex; flex-wrap:wrap; gap:12px 30px; margin-top:42px; padding:20px 0; border-block:1px solid var(--line); color:#b6b8bf; font-size:.72rem; }
 .footer-compliance b { margin-right:6px; color:#e8e9ec; font-family:var(--font-condensed); letter-spacing:.08em; text-transform:uppercase; }
-.footer-bottom { display:flex; justify-content:space-between; margin-top:50px; padding-top:20px; border-top:1px solid var(--line); color:#777; font-size:.68rem; }
+.analytics-notice { display:flex; justify-content:space-between; gap:20px; padding-top:18px; color:#a8aab0; font-size:.7rem; }
+.analytics-notice a { flex:none; color:var(--gold-2); text-decoration:underline; text-underline-offset:3px; }
+.footer-bottom { display:flex; justify-content:space-between; margin-top:32px; padding-top:20px; border-top:1px solid var(--line); color:#85878c; font-size:.68rem; }
 
 .admin-shell { min-height:100vh; background:#0b0c0e; }
 .admin-header { padding:16px 0; border-bottom:1px solid var(--line); }
@@ -301,7 +303,7 @@ img { display:block; max-width:100%; }
   .director-panel { padding:28px; }
   .policy-section { grid-template-columns:1fr; gap:10px; }
   .form-grid .span-2,.admin-form label.full { grid-column:auto; }
-  .footer-bottom,.vehicle-interest { flex-direction:column; }
+  .analytics-notice,.footer-bottom,.vehicle-interest { flex-direction:column; }
   .card-price { align-items:flex-start; flex-direction:column; }
 }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; animation:none!important; } }

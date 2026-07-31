@@ -140,7 +140,7 @@ export default function PrivacyPage() {
           </ul>
           <p>Cookies may collect technical information such as your IP address, browser, device, approximate location, referral source and pages viewed.</p>
           <p>You can usually manage or disable cookies through your browser settings. Disabling some cookies may affect how the website functions.</p>
-          <p>Cloudflare provides hosting, security, database and media services. Resend may process email notifications when configured. No advertising pixels or audience analytics are currently configured.</p>
+          <p>Cloudflare provides hosting, security, database and media services. Cloudflare Web Analytics may collect aggregate, privacy-focused website performance and usage information without using cookies or cross-site identifiers. Resend may process email notifications when configured. No advertising pixels or marketing cookies are currently configured.</p>
         </PolicySection>
 
         <PolicySection number="08" title="Direct marketing">
