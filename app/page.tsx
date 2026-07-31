@@ -10,6 +10,34 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const featured = (await listPublicVehicles({ featured: true })).slice(0, 3);
+  const dealerSchema = {
+    "@context": "https://schema.org",
+    "@type": "AutoDealer",
+    "@id": `${siteConfig.url}/#dealer`,
+    name: siteConfig.name,
+    legalName: siteConfig.legalEntity,
+    url: siteConfig.url,
+    image: `${siteConfig.url}/og.png`,
+    telephone: "+61451461705",
+    email: siteConfig.emailDisplay,
+    priceRange: "$$$",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "110 Dales Road",
+      addressLocality: "Kobble Creek",
+      addressRegion: "QLD",
+      postalCode: "4520",
+      addressCountry: "AU",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: siteConfig.latitude,
+      longitude: siteConfig.longitude,
+    },
+    openingHours: "By appointment",
+    areaServed: { "@type": "Country", name: "Australia" },
+    identifier: { "@type": "PropertyValue", name: "ABN", value: siteConfig.abn },
+  };
   return (
     <PublicShell>
       <section className="hero">
@@ -35,7 +63,20 @@ export default async function Home() {
       </div></div></section>
 
       <section className="section shell"><div className="relationship"><div className="relationship-mark relationship-mark-logo"><Image unoptimized src="/brand/betts-works-logo.png" width={1280} height={1280} alt="Betts Works car dealer — importing cars into Australia" /></div><div><p className="eyebrow">Multiple ways to buy</p><h2>Betts Works sells, sources and delivers.</h2><p>{siteConfig.relationship}</p><p className="legal-line">Each vehicle listing identifies the relevant vehicle, specifications, availability and selling dealer. Availability is always subject to confirmation.</p><Link className="button button-secondary" href="/scd-direct">Explore your options <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className="section section-dark" aria-labelledby="trust-heading">
+        <div className="shell">
+          <div className="section-heading"><div><p className="eyebrow">A clear buying pathway</p><h2 id="trust-heading">Confidence at every step.</h2></div><p>Vehicle-specific details are confirmed in writing before purchase.</p></div>
+          <div className="trust-grid">
+            <article className="trust-card"><h3>Direct contact</h3><p>Deal directly with Tyson from initial enquiry through sourcing, quote and delivery coordination.</p></article>
+            <article className="trust-card"><h3>Specialist conversion</h3><p>Vehicles requiring Australian conversion are entrusted to SCD for right-hand-drive conversion and applicable compliance work.</p></article>
+            <article className="trust-card"><h3>Delivery coordination</h3><p>Collection and delivery options across Australia are discussed and itemised for the individual vehicle and destination.</p></article>
+            <article className="trust-card"><h3>Written terms</h3><p>Price basis, on-road costs and vehicle-specific warranty information are provided in writing where applicable. Australian Consumer Law rights are unaffected.</p></article>
+          </div>
+          <p className="finance-guidance">Finance or third-party provider introductions and government, registration, insurance, delivery and other on-road costs are handled on enquiry and confirmed in the written quote.</p>
+        </div>
+      </section>
       <section className="cta-band"><div className="shell"><h2>Tell us what you want to drive.</h2><Link className="button" href="/contact">Start an enquiry <span aria-hidden="true">→</span></Link></div></section>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dealerSchema).replace(/</g, "\\u003c") }} />
     </PublicShell>
   );
 }

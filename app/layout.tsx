@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   applicationName: "Betts Works",
   category: "automotive",
   alternates: { canonical: "/" },
-  openGraph: { type: "website", locale: "en_AU", siteName: "Betts Works", title: siteConfig.title, description: siteConfig.description, images: [{ url: "/og.png", width: 1707, height: 907, alt: "Betts Works — American trucks. Australian roads." }] },
-  twitter: { card: "summary_large_image", title: siteConfig.title, description: siteConfig.description, images: ["/og.png"] },
+  openGraph: { type: "website", locale: "en_AU", siteName: "Betts Works", title: siteConfig.title, description: siteConfig.description, images: [{ url: "https://bettsworks.com.au/og.png", width: 1707, height: 907, alt: "Betts Works — American trucks. Australian roads." }] },
+  twitter: { card: "summary_large_image", title: siteConfig.title, description: siteConfig.description, images: ["https://bettsworks.com.au/og.png"] },
 };
 
 export const viewport: Viewport = { themeColor: "#0A0A0C", colorScheme: "dark" };

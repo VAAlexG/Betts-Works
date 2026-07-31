@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/app/components/PageHero";
 import { PublicShell } from "@/app/components/PublicShell";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "About",
@@ -64,6 +65,18 @@ export default function AboutPage() {
             <p>Betts Works was created to combine this technical knowledge with a straightforward and personal vehicle-buying experience. Tyson understands that purchasing an imported American vehicle is a major decision, so his focus is on clear communication, honest information and helping each customer find the right vehicle for their needs.</p>
             <p>When you deal with Betts Works, you are dealing directly with someone who understands how these vehicles are sourced, converted and prepared—not simply someone selling them.</p>
           </div>
+        </div>
+      </section>
+
+      <section className="section section-dark">
+        <div className="shell">
+          <div className="section-heading"><div><p className="eyebrow">Business details</p><h2>Clear, accountable dealership information.</h2></div><p>Contact Tyson to arrange an appointment or request a written vehicle quote.</p></div>
+          <dl className="compliance-panel">
+            <div><dt>Legal entity</dt><dd>{siteConfig.legalEntity}</dd></div>
+            <div><dt>ABN</dt><dd>{siteConfig.abn}</dd></div>
+            <div><dt>QLD motor dealer licence</dt><dd>{siteConfig.motorDealerLicence}</dd></div>
+            <div><dt>Trading hours</dt><dd>{siteConfig.hours}</dd></div>
+          </dl>
         </div>
       </section>
     </PublicShell>

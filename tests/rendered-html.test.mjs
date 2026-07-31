@@ -42,7 +42,12 @@ test("server-renders the finished Betts Works homepage", async () => {
   assert.match(html, /\$259,000/);
   assert.match(html, /\/brand\/bw-hex-dark\.png/);
   assert.match(html, /\/brand\/betts-works-logo\.png/);
-  assert.doesNotMatch(html, /_vinext\/image/);
+  assert.match(html, /https:\/\/bettsworks\.com\.au\/og\.png/);
+  assert.match(html, /https:\/\/bettsworks\.com\.au\/?/);
+  assert.doesNotMatch(html, /localhost/i);
+  assert.match(html, /"@type":"AutoDealer"/);
+  assert.match(html, /37 195 578 714/);
+  assert.doesNotMatch(html, /href="\/admin"/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
@@ -51,16 +56,62 @@ test("protects admin indexing and browser surfaces", async () => {
   assert.equal(response.status, 200);
   assert.equal(response.headers.get("x-robots-tag"), "noindex, nofollow");
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
+  assert.equal(response.headers.get("strict-transport-security"), "max-age=63072000; includeSubDomains; preload");
+  assert.equal(response.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
+  assert.equal(response.headers.get("permissions-policy"), "camera=(), microphone=(), geolocation=()");
+  assert.equal(response.headers.get("x-frame-options"), "SAMEORIGIN");
   assert.match(response.headers.get("content-security-policy") ?? "", /object-src 'none'/);
+  assert.match(response.headers.get("content-security-policy") ?? "", /frame-ancestors 'self'/);
+  assert.match(response.headers.get("content-security-policy") ?? "", /upgrade-insecure-requests/);
   assert.match(await response.text(), /Administrator sign-in required|Protected administration/);
 });
 
-test("renders the approved privacy policy with pending business placeholders", async () => {
+test("renders completed privacy and business details without placeholders", async () => {
   const response = await fetch(`${origin}/privacy`);
   const html = await response.text();
   assert.equal(response.status, 200);
   assert.match(html, /Effective 28 July 2026/);
   assert.match(html, /Privacy Act 1988/);
   assert.match(html, /tyson@bettsworks\.com\.au/);
-  assert.match(html, /\[Insert ABN\]/);
+  assert.match(html, /37 195 578 714/);
+  assert.doesNotMatch(html, /\[(?:insert|Insert)/);
+});
+
+test("uses production metadata on every public page", async () => {
+  const paths = ["/", "/stock", "/about", "/scd-direct", "/faq", "/contact", "/privacy", "/terms", "/vehicles/2025-ford-f450-platinum-0001"];
+  for (const path of paths) {
+    const response = await fetch(`${origin}${path}`);
+    assert.equal(response.status, 200, path);
+    const html = await response.text();
+    assert.doesNotMatch(html, /localhost/i, path);
+    assert.match(html, new RegExp(`https://bettsworks\\.com\\.au${path === "/" ? "/?" : path.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`), path);
+    assert.match(html, /(?:https:\/\/bettsworks\.com\.au\/(?:og\.png|api\/images\/)|https:\/\/cdn\.images\.stock\.i-motor\.net\.au\/)/i, path);
+  }
+});
+
+test("publishes crawl controls and vehicle structured data", async () => {
+  const robots = await (await fetch(`${origin}/robots.txt`)).text();
+  assert.match(robots, /Disallow: \/admin/);
+  assert.match(robots, /Sitemap: https:\/\/bettsworks\.com\.au\/sitemap\.xml/);
+  const sitemap = await (await fetch(`${origin}/sitemap.xml`)).text();
+  assert.match(sitemap, /https:\/\/bettsworks\.com\.au\/stock/);
+  assert.match(sitemap, /https:\/\/bettsworks\.com\.au\/vehicles\/2025-ford-f450-platinum-0001/);
+  const vehicle = await (await fetch(`${origin}/vehicles/2025-ford-f450-platinum-0001`)).text();
+  assert.match(vehicle, /"@type":\["Car","Vehicle"\]/);
+  assert.match(vehicle, /"priceCurrency":"AUD"/);
+  const pagedStock = await (await fetch(`${origin}/stock?page=2`)).text();
+  assert.match(pagedStock, /Load more vehicles|vehicle-card/);
+});
+
+test("issues a same-origin CSRF cookie and rejects an unprotected enquiry", async () => {
+  const tokenResponse = await fetch(`${origin}/api/enquiries/csrf`);
+  assert.equal(tokenResponse.status, 200);
+  assert.match(tokenResponse.headers.get("set-cookie") ?? "", /bw_csrf=.*HttpOnly.*SameSite=Strict/i);
+  const rejected = await fetch(`${origin}/api/enquiries`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Origin: origin },
+    body: "{}",
+  });
+  assert.equal(rejected.status, 403);
+  assert.doesNotMatch(await rejected.text(), /stack|trace|exception/i);
 });

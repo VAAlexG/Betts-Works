@@ -5,7 +5,7 @@ export function VehicleMedia({ vehicle, image, priority = false }: { vehicle: Ve
   if (image) {
     const externalSCDImage = /^https:\/\/cdn\.images\.stock\.i-motor\.net\.au\/vehicles\/(?:large|medium)\//.test(image.storageKey);
     const src = externalSCDImage ? image.storageKey : `/api/images/${encodeURIComponent(image.storageKey)}`;
-    return <Image unoptimized className="vehicle-photo" src={src} alt={image.altText} width={image.width || 1200} height={image.height || 800} priority={priority} sizes="(max-width: 760px) 100vw, 50vw" />;
+    return <Image className="vehicle-photo" src={src} alt={image.altText} width={image.width || 1200} height={image.height || 800} priority={priority} loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : "auto"} sizes="(max-width: 760px) 100vw, (max-width: 1180px) 50vw, 40vw" />;
   }
   return (
     <div className="vehicle-placeholder" role="img" aria-label={`Approved photography pending for ${vehicle.year} ${vehicle.make} ${vehicle.model}`}>

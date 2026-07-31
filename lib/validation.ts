@@ -5,14 +5,14 @@ const trimmed = (max: number) => z.string().trim().min(1).max(max);
 export const enquirySchema = z.object({
   vehicleId: z.string().trim().max(80).optional().nullable(),
   name: trimmed(100),
-  email: z.email().max(254),
+  email: z.string().trim().pipe(z.email().max(254)),
   phone: z.string().trim().min(8).max(30).regex(/^[+()\-\s\d]+$/, "Enter a valid phone number"),
-  stateOrPostcode: trimmed(20),
+  stateOrPostcode: z.string().trim().min(2).max(20).regex(/^(?:ACT|NSW|NT|QLD|SA|TAS|VIC|WA|\d{4})$/i, "Enter an Australian state or four-digit postcode"),
   preferredContactMethod: z.enum(["phone", "email"]),
   message: trimmed(2000),
   consent: z.literal(true, { error: "Please acknowledge the privacy notice" }),
   marketingConsent: z.boolean().default(false),
-  sourcePage: z.string().trim().max(300).default("/contact"),
+  sourcePage: z.string().trim().max(300).regex(/^\/(?!\/)/, "Invalid source page").default("/contact"),
   company: z.string().max(0, "Submission rejected").default(""),
   turnstileToken: z.string().max(3000).optional(),
 });

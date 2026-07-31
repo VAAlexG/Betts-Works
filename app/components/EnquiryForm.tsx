@@ -19,7 +19,20 @@ export function EnquiryForm({ vehicleId, vehicleLabel, sourcePage = "/contact" }
       consent: formData.get("consent") === "on", marketingConsent: formData.get("marketingConsent") === "on", sourcePage,
     };
     try {
-      const response = await fetch("/api/enquiries", { method: "POST", headers: { "Content-Type": "application/json", "Idempotency-Key": crypto.randomUUID() }, body: JSON.stringify(payload) });
+      const csrfResponse = await fetch("/api/enquiries/csrf", { cache: "no-store", credentials: "same-origin" });
+      if (!csrfResponse.ok) throw new Error("We could not secure this submission. Please refresh and try again.");
+      const { token } = await csrfResponse.json() as { token?: string };
+      if (!token) throw new Error("We could not secure this submission. Please refresh and try again.");
+      const response = await fetch("/api/enquiries", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          "Idempotency-Key": crypto.randomUUID(),
+          "X-CSRF-Token": token,
+        },
+        body: JSON.stringify(payload),
+      });
       const result = await response.json() as { ok?: boolean; message?: string; reference?: string; errors?: Record<string, string[]> };
       if (!response.ok || !result.ok) throw new Error(result.message || Object.values(result.errors || {}).flat()[0] || "Please check the form and try again.");
       form.reset();
@@ -35,7 +48,7 @@ export function EnquiryForm({ vehicleId, vehicleLabel, sourcePage = "/contact" }
         <label>Full name<input name="name" autoComplete="name" required maxLength={100} /></label>
         <label>Email<input name="email" type="email" autoComplete="email" required maxLength={254} /></label>
         <label>Phone<input name="phone" type="tel" autoComplete="tel" required maxLength={30} /></label>
-        <label>State or postcode<input name="stateOrPostcode" autoComplete="address-level1" required maxLength={20} placeholder="e.g. QLD or 4000" /></label>
+        <label>State or postcode<input name="stateOrPostcode" autoComplete="postal-code" required maxLength={20} placeholder="e.g. QLD or 4000" /></label>
         <label>Preferred contact<select name="preferredContactMethod" defaultValue="phone"><option value="phone">Phone</option><option value="email">Email</option></select></label>
         <label className="span-2">Message<textarea name="message" rows={5} required maxLength={2000} placeholder="Tell us what you’d like to know." /></label>
         <label className="honeypot" aria-hidden="true">Company<input name="company" tabIndex={-1} autoComplete="off" /></label>

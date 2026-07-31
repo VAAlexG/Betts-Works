@@ -18,12 +18,25 @@ async function send(to: string, subject: string, text: string) {
   return "sent" as const;
 }
 
+function safeHeader(value: string, max = 160) {
+  return value.replace(/[\r\n\u0000-\u001f\u007f]+/g, " ").trim().slice(0, max);
+}
+
+function safeText(value: string, max = 4000) {
+  return value.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, "").trim().slice(0, max);
+}
+
 export async function notifyEnquiry(enquiry: { id: string; name: string; email: string; phone: string; vehicleLabel?: string }) {
   const sales = value("SALES_NOTIFICATION_EMAIL");
   if (!sales) return "not_configured" as const;
-  await send(sales, `New Betts Works enquiry — ${enquiry.vehicleLabel || "general"}`, `A new enquiry has been stored securely.\n\nReference: ${enquiry.id}\nName: ${enquiry.name}\nEmail: ${enquiry.email}\nPhone: ${enquiry.phone}\nVehicle: ${enquiry.vehicleLabel || "General enquiry"}\n\nReview the full message in the protected administration area.`);
+  const name = safeText(enquiry.name, 100);
+  const email = safeText(enquiry.email, 254);
+  const phone = safeText(enquiry.phone, 30);
+  const vehicle = safeText(enquiry.vehicleLabel || "General enquiry", 160);
+  const reference = safeText(enquiry.id, 80);
+  await send(sales, safeHeader(`New Betts Works enquiry — ${vehicle}`), `A new enquiry has been stored securely.\n\nReference: ${reference}\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nVehicle: ${vehicle}\n\nReview the full message in the protected administration area.`);
   try {
-    await send(enquiry.email, "We received your Betts Works enquiry", `Hi ${enquiry.name},\n\nThanks for contacting Betts Works. Your enquiry has been received and saved. A member of the sales team will respond using your preferred contact method.\n\nReference: ${enquiry.id}\n\nBetts Works`);
+    await send(email, "We received your Betts Works enquiry", `Hi ${name},\n\nThanks for contacting Betts Works. Your enquiry has been received and saved. A member of the sales team will respond using your preferred contact method.\n\nReference: ${reference}\n\nBetts Works`);
   } catch {
     // The sales copy was already sent; acknowledgement failure is non-fatal.
   }

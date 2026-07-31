@@ -2,15 +2,16 @@
 
 import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import type { Vehicle } from "@/db/schema";
 import { VehicleCard } from "@/app/components/VehicleCard";
 
 const PAGE_SIZE = 6;
 
-export function StockBrowser({ vehicles }: { vehicles: Vehicle[] }) {
+export function StockBrowser({ vehicles, initialPage = 1 }: { vehicles: Vehicle[]; initialPage?: number }) {
   const params = useSearchParams();
   const router = useRouter();
-  const [limit, setLimit] = useState(PAGE_SIZE);
+  const [limit, setLimit] = useState(PAGE_SIZE * initialPage);
   const [filters, setFilters] = useState({ q: params.get("q") || "", make: params.get("make") || "", year: params.get("year") || "", body: params.get("body") || "", fuel: params.get("fuel") || "", transmission: params.get("transmission") || "", availability: params.get("availability") || "", sort: params.get("sort") || "newest" });
   const options = (key: keyof Vehicle) => [...new Set(vehicles.map((v) => String(v[key] || "")).filter(Boolean))].sort();
   const filtered = useMemo(() => {
@@ -23,6 +24,12 @@ export function StockBrowser({ vehicles }: { vehicles: Vehicle[] }) {
     router.replace(`/stock${search.size ? `?${search}` : ""}`, { scroll: false });
   }
   function reset() { const next = { q:"",make:"",year:"",body:"",fuel:"",transmission:"",availability:"",sort:"newest" }; setFilters(next); setLimit(PAGE_SIZE); router.replace("/stock", { scroll:false }); }
+  function nextPageHref() {
+    const search = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => { if (value && !(key === "sort" && value === "newest")) search.set(key, value); });
+    search.set("page", String(Math.floor(limit / PAGE_SIZE) + 1));
+    return `/stock?${search}`;
+  }
   return <>
     <div className="filter-panel" aria-label="Filter current stock">
       <label>Search<input type="search" value={filters.q} onChange={(e)=>update("q",e.target.value)} placeholder="Make, model or stock no." /></label>
@@ -37,6 +44,6 @@ export function StockBrowser({ vehicles }: { vehicles: Vehicle[] }) {
     </div>
     <div className="results-meta" role="status" aria-live="polite"><span>{filtered.length} {filtered.length === 1 ? "vehicle" : "vehicles"}</span><span>Sold vehicles excluded</span></div>
     <div className="vehicle-grid">{filtered.slice(0,limit).map(vehicle=><VehicleCard key={vehicle.id} vehicle={vehicle} />)}{!filtered.length && <div className="empty-state"><h2>No matching vehicles</h2><p className="muted">Try broadening your filters or contact Betts Works.</p><button type="button" className="button" onClick={reset}>Reset filters</button></div>}</div>
-    {limit < filtered.length && <div style={{textAlign:"center",marginTop:30}}><button className="button button-secondary" type="button" onClick={()=>setLimit(limit+PAGE_SIZE)}>Load more vehicles</button></div>}
+    {limit < filtered.length && <div className="load-more"><Link className="button button-secondary" href={nextPageHref()} scroll={false} onClick={()=>setLimit(limit+PAGE_SIZE)}>Load more vehicles</Link></div>}
   </>;
 }

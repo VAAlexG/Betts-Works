@@ -36,7 +36,7 @@ export default function PrivacyPage() {
         </div>
 
         <PolicySection number="01" title="About this policy">
-          <p>This Privacy Policy explains how <span className="policy-placeholder">[insert full legal entity name]</span>, trading as Betts Works (“Betts Works”, “we”, “us” or “our”), collects, holds, uses and discloses personal information when you:</p>
+          <p>This Privacy Policy explains how Tyson Jade Betts, trading as Betts Works (“Betts Works”, “we”, “us” or “our”), collects, holds, uses and discloses personal information when you:</p>
           <ul>
             <li>visit bettsworks.com.au;</li>
             <li>submit an enquiry or request information about a vehicle;</li>
@@ -125,7 +125,7 @@ export default function PrivacyPage() {
 
         <PolicySection number="06" title="Overseas disclosure">
           <p>Because Betts Works sources vehicles internationally and may use technology providers operating outside Australia, personal information may sometimes be disclosed to or processed in another country.</p>
-          <p>The countries involved may include <span className="policy-placeholder">[insert applicable countries—for example, the United States and countries in which your hosting or email providers operate]</span>.</p>
+          <p>The countries involved may include the United States and other locations in which our hosting, security or email service providers operate.</p>
           <p>We will only disclose information overseas when reasonably necessary for the requested service, where you have authorised us to do so, or where otherwise permitted by law. Where applicable, we take reasonable steps to ensure overseas recipients handle personal information appropriately.</p>
         </PolicySection>
 
@@ -140,7 +140,7 @@ export default function PrivacyPage() {
           </ul>
           <p>Cookies may collect technical information such as your IP address, browser, device, approximate location, referral source and pages viewed.</p>
           <p>You can usually manage or disable cookies through your browser settings. Disabling some cookies may affect how the website functions.</p>
-          <p>Website services currently used: <span className="policy-placeholder">[Insert analytics, advertising, hosting, form and cookie providers—for example, Google Analytics or Meta Pixel—or state that none are currently used.]</span></p>
+          <p>Cloudflare provides hosting, security, database and media services. Resend may process email notifications when configured. No advertising pixels or audience analytics are currently configured.</p>
         </PolicySection>
 
         <PolicySection number="08" title="Direct marketing">
@@ -196,8 +196,8 @@ export default function PrivacyPage() {
           <p>For privacy enquiries, access or correction requests, or complaints, please contact:</p>
           <address className="policy-contact">
             <strong>Betts Works</strong>
-            <span>Legal entity: <span className="policy-placeholder">[Insert full legal entity name]</span></span>
-            <span>ABN: <span className="policy-placeholder">[Insert ABN]</span></span>
+            <span>Legal entity: Tyson Jade Betts trading as Betts Works</span>
+            <span>ABN: 37 195 578 714</span>
             <span>110 Dales Road, Kobble Creek QLD 4520</span>
             <a href="mailto:tyson@bettsworks.com.au">tyson@bettsworks.com.au</a>
             <a href="tel:+61451461705">0451 461 705</a>

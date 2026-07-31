@@ -16,7 +16,8 @@ const faqs = [
   ["Are SCD-supplied vehicles also available through SCD?", "They may be. SCD continues to advertise and sell its own stock directly, so availability of an SCD-supplied vehicle remains subject to confirmation."],
   ["Does every vehicle meet Australian compliance requirements?", "A vehicle’s compliance status is shown only when verified in its inventory record. Ask Betts Works to confirm the current status and applicable conversion or compliance pathway before purchase."],
   ["What does POA mean?", "Price on application. Contact Betts Works for current pricing and the applicable price basis."],
-  ["Are prices drive-away?", "Only a listing explicitly described as drive-away should use that wording. Otherwise, the price qualifier explains the basis, such as excluding on-road costs or POA."],
+  ["Are prices drive-away?", "Only a listing explicitly described as drive-away should use that wording. Otherwise, the price qualifier explains the basis, such as excluding on-road costs or POA. Government charges, registration, insurance, delivery and other applicable on-road costs are itemised or confirmed in the written quote."],
+  ["Can Betts Works help with finance?", "Finance options or an introduction to a third-party provider can be discussed on enquiry. Any application, approval, fees and terms are subject to the provider’s assessment and are not guaranteed by Betts Works."],
   ["What warranty applies?", "Ask Betts Works for the written warranty details applicable to the specific vehicle. Nothing on this website limits rights under the Australian Consumer Law."],
   ["How do I enquire?", "Open a vehicle and use its linked form, or use the general contact page. Include the stock number for an advertised vehicle, or describe the vehicle you would like us to source."],
 ];
