@@ -4,8 +4,9 @@ import Image from "next/image";
 export function BrandMark({ compact = false }: { compact?: boolean }) {
   return (
     <Link href="/" className="brand" aria-label="Betts Works home">
-      <Image unoptimized className="brand-emblem" src="/brand/bw-hex-dark.png" width={305} height={252} alt="" priority />
-      {!compact && <span className="brand-wordmark"><strong>BETTS WORKS</strong><small>CAR DEALER</small></span>}
+      <span className={compact ? "brand-approved-frame is-compact" : "brand-approved-frame"} aria-hidden="true">
+        <Image unoptimized className="brand-approved-logo" src="/brand/betts-works-logo.png" width={1280} height={1280} alt="" priority />
+      </span>
     </Link>
   );
 }

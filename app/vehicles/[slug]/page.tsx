@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { PublicShell } from "@/app/components/PublicShell";
 import { StatusBadge } from "@/app/components/StatusBadge";
-import { VehicleMedia } from "@/app/components/VehicleMedia";
+import { VehicleGallery } from "@/app/components/VehicleGallery";
 import { VehicleCard } from "@/app/components/VehicleCard";
 import { EnquiryForm } from "@/app/components/EnquiryForm";
 import { getPublicVehicle, listRelatedVehicles } from "@/lib/data";
@@ -121,10 +121,7 @@ export default async function VehiclePage({ params }: Props) {
       <section className="vehicle-detail shell">
         <nav className="crumbs" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/stock">Stock</Link><span>/</span><span>{v.year} {v.make} {v.model}</span></nav>
         <div className="vehicle-layout">
-          <div className="vehicle-gallery">
-            <div className="vehicle-gallery-main"><VehicleMedia vehicle={v} image={v.images[0]} priority /></div>
-            {v.images.length > 1 && <div className="vehicle-gallery-thumbs">{v.images.slice(1).map((image) => <div key={image.id}><VehicleMedia vehicle={v} image={image} /></div>)}</div>}
-          </div>
+          <VehicleGallery vehicle={v} images={v.images} />
           <aside className="vehicle-summary">
             <StatusBadge status={v.availabilityStatus} />
             <h1>{v.year} {v.make} {v.model}</h1>

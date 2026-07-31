@@ -40,8 +40,8 @@ test("server-renders the finished Betts Works homepage", async () => {
   assert.match(html, /Personalised vehicle sourcing/i);
   assert.match(html, /2025 Ford F350 Lariat/i);
   assert.match(html, /\$259,000/);
-  assert.match(html, /\/brand\/bw-hex-dark\.png/);
-  assert.match(html, /\/brand\/betts-works-logo\.png/);
+    assert.match(html, /\/brand\/betts-works-logo\.png/);
+    assert.match(html, /brand-approved-logo/);
   assert.match(html, /https:\/\/bettsworks\.com\.au\/og\.png/);
   assert.match(html, /https:\/\/bettsworks\.com\.au\/?/);
   assert.doesNotMatch(html, /localhost/i);
@@ -99,6 +99,8 @@ test("publishes crawl controls and vehicle structured data", async () => {
   const vehicle = await (await fetch(`${origin}/vehicles/2025-ford-f450-platinum-0001`)).text();
   assert.match(vehicle, /"@type":\["Car","Vehicle"\]/);
   assert.match(vehicle, /"priceCurrency":"AUD"/);
+  assert.match(vehicle, /Enlarge photo 1 of \d+/);
+  assert.match(vehicle, /aria-haspopup="dialog"/);
   const pagedStock = await (await fetch(`${origin}/stock?page=2`)).text();
   assert.match(pagedStock, /Load more vehicles|vehicle-card/);
 });

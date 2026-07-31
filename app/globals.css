@@ -37,11 +37,13 @@ img { display:block; max-width:100%; }
 .site-header { position:sticky; top:0; z-index:50; background:rgba(10,10,12,.94); border-bottom:1px solid rgba(201,204,211,.18); backdrop-filter:blur(18px); }
 .site-header::after { content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px; background:linear-gradient(90deg,var(--red) 0 12%,var(--silver) 12% 18%,var(--blue) 18% 30%,transparent 30%); }
 .header-inner { width:var(--shell); height:84px; margin:auto; display:flex; align-items:center; justify-content:space-between; }
-.brand { display:inline-flex; align-items:center; gap:12px; }
-.brand-emblem { width:50px; height:auto; flex:none; }
-.brand-wordmark { padding-left:12px; border-left:1px solid #4b4c52; }
-.brand strong { display:block; color:var(--silver); font-family:var(--font-display); letter-spacing:.045em; font-size:1.23rem; font-weight:400; line-height:1; }
-.brand small { display:inline-block; margin-top:7px; padding:1px 6px 2px; border:1px solid var(--gold); color:var(--gold); font-family:var(--font-condensed); font-size:.52rem; font-weight:600; letter-spacing:.26em; line-height:1.1; }
+.brand { display:inline-flex; align-items:center; flex:none; }
+.brand-approved-frame { position:relative; display:block; width:132px; height:82px; overflow:hidden; flex:none; }
+.brand-approved-logo { position:absolute; left:-26px; top:-46px; width:184px; height:184px; max-width:none; object-fit:contain; }
+.brand-approved-frame.is-compact { width:112px; height:70px; }
+.brand-approved-frame.is-compact .brand-approved-logo { left:-22px; top:-39px; width:156px; height:156px; }
+.site-footer .brand-approved-frame { width:160px; height:100px; }
+.site-footer .brand-approved-logo { left:-31px; top:-56px; width:223px; height:223px; }
 .main-nav { display:flex; align-items:center; gap:24px; font-family:var(--font-condensed); font-size:.78rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; }
 .main-nav>a:not(.button) { color:#d7d8dd; padding-block:31px; border-bottom:2px solid transparent; }
 .main-nav>a:not(.button):hover,.main-nav>a.active { color:#fff; border-bottom-color:var(--gold); }
@@ -185,9 +187,26 @@ img { display:block; max-width:100%; }
 .vehicle-gallery { display:grid; gap:12px; min-width:0; }
 .vehicle-gallery-main { overflow:hidden; background:#0a0a0c; border:1px solid var(--line); }
 .vehicle-gallery-main .vehicle-photo { width:100%; height:100%; object-fit:cover; }
+.gallery-image-button { position:relative; display:block; width:100%; height:100%; padding:0; overflow:hidden; border:0; background:#0a0a0c; color:inherit; cursor:zoom-in; text-align:inherit; }
+.gallery-image-button .vehicle-photo { transition:transform .25s ease,filter .25s ease; }
+.gallery-image-button:hover .vehicle-photo { transform:scale(1.015); filter:brightness(.88); }
+.gallery-image-button:focus-visible { outline:3px solid var(--gold); outline-offset:-3px; }
+.gallery-zoom-hint { position:absolute; right:14px; bottom:14px; padding:8px 11px; border:1px solid rgba(255,255,255,.42); background:rgba(5,5,7,.82); color:#fff; font-family:var(--font-condensed); font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; pointer-events:none; }
 .vehicle-gallery-thumbs { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-.vehicle-gallery-thumbs>div { aspect-ratio:16/10; overflow:hidden; border:1px solid var(--line); background:var(--surface); }
+.vehicle-gallery-thumbs>button { aspect-ratio:16/10; border:1px solid var(--line); background:var(--surface); }
 .vehicle-gallery-thumbs .vehicle-photo { width:100%; height:100%; object-fit:cover; }
+.lightbox-backdrop { position:fixed; z-index:250; inset:0; display:grid; place-items:center; padding:20px; background:rgba(0,0,0,.92); backdrop-filter:blur(8px); }
+.lightbox-dialog { display:grid; grid-template-rows:auto minmax(0,1fr) auto; width:min(96vw,1500px); height:min(94vh,1000px); overflow:hidden; border:1px solid #4c4d53; background:#08090b; box-shadow:0 25px 90px rgba(0,0,0,.75); }
+.lightbox-toolbar { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:14px 18px; border-bottom:1px solid var(--line); }
+.lightbox-toolbar strong { display:block; color:#fff; font-family:var(--font-condensed); font-size:1rem; letter-spacing:.08em; text-transform:uppercase; }
+.lightbox-toolbar span { display:block; margin-top:3px; color:var(--muted); font-size:.78rem; }
+.lightbox-close { display:grid; place-items:center; flex:none; width:44px; height:44px; padding:0; border:1px solid #555861; background:#141519; color:#fff; font-size:1.8rem; line-height:1; cursor:pointer; }
+.lightbox-image { display:grid; min-height:0; place-items:center; overflow:hidden; background:#030303; }
+.lightbox-image .vehicle-photo { width:auto; height:auto; max-width:100%; max-height:100%; object-fit:contain; }
+.lightbox-controls { display:flex; justify-content:space-between; gap:12px; padding:12px 18px; border-top:1px solid var(--line); }
+.lightbox-controls button { min-width:130px; padding:11px 16px; border:1px solid #555861; background:#141519; color:#fff; font-family:var(--font-condensed); font-weight:700; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
+.lightbox-close:hover,.lightbox-controls button:hover { border-color:var(--gold); color:#f6dda5; }
+.lightbox-close:focus-visible,.lightbox-controls button:focus-visible { outline:3px solid var(--gold); outline-offset:2px; }
 .vehicle-summary { position:sticky; top:105px; }
 .vehicle-summary h1 { font:400 clamp(2.8rem,5vw,5rem)/.95 var(--font-display); text-transform:uppercase; margin:18px 0 2px; }
 .vehicle-summary .variant { font-size:1.25rem; }
@@ -296,9 +315,17 @@ img { display:block; max-width:100%; }
   .admin-table { display:block; overflow-x:auto; }
 }
 @media (max-width:520px) {
-  .brand small { display:none; }
+  .brand-approved-frame { width:105px; height:65px; }
+  .brand-approved-logo { left:-21px; top:-36px; width:146px; height:146px; }
   .hero-actions .button { width:100%; }
   .hero-proof { display:grid; gap:12px; }
+  .lightbox-backdrop { padding:6px; }
+  .lightbox-dialog { width:100%; height:calc(100dvh - 12px); }
+  .lightbox-toolbar { padding:10px 12px; }
+  .lightbox-toolbar strong { max-width:250px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.86rem; }
+  .lightbox-close { width:42px; height:42px; }
+  .lightbox-controls { padding:10px; }
+  .lightbox-controls button { min-width:0; flex:1; padding-inline:10px; }
   .vehicle-grid,.benefit-grid,.trust-grid,.compliance-panel,.footer-grid,.filter-panel,.form-grid,.spec-table,.feature-list,.metric-grid,.admin-form,.policy-meta { grid-template-columns:1fr; }
   .director-panel { padding:28px; }
   .policy-section { grid-template-columns:1fr; gap:10px; }
