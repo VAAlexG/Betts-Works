@@ -8,7 +8,7 @@ export function Footer() {
       <div className="footer-grid shell">
         <div><BrandMark /><p className="muted">Independent Australian dealer of American trucks and selected vehicles.</p></div>
         <div><h2>Explore</h2>{navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div>
-        <div><h2>Contact</h2><a href={siteConfig.phoneHref}>{siteConfig.phoneDisplay}</a><a href={siteConfig.emailHref}>{siteConfig.emailDisplay}</a><span>{siteConfig.location}</span></div>
+        <div><h2>Contact</h2><Link href="/contact">Make an enquiry →</Link><a href={siteConfig.phoneHref}>{siteConfig.phoneDisplay}</a><a href={siteConfig.emailHref}>{siteConfig.emailDisplay}</a><span>{siteConfig.location}</span></div>
         <div><h2>Important</h2><p>Each listing identifies the relevant vehicle, availability and selling dealer. Confirm current details before purchase.</p><Link href="/privacy">Privacy policy</Link><Link href="/terms">Website terms</Link></div>
       </div>
       <div className="footer-compliance shell" aria-label="Business and compliance details">

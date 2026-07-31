@@ -5,7 +5,7 @@ import { PublicShell } from "@/app/components/PublicShell";
 
 export const metadata: Metadata = {
   title: "Vehicle sales, sourcing and conversion",
-  description: "Learn how Betts Works sells selected vehicles, holds dealership inventory, sources vehicles overseas and works with SCD on Australian conversion.",
+  description: "Learn how Betts Works sells selected vehicles, holds dealership inventory, sources vehicles overseas and coordinates specialist Australian conversion.",
   alternates: { canonical: "/scd-direct" },
 };
 
@@ -33,7 +33,7 @@ export default function SCDPage() {
       <PageHero
         eyebrow="Multiple ways to find your next vehicle"
         title="Betts Works sells. Sources. And delivers."
-        intro="Betts Works offers customers access to a wider selection of American vehicles through three dedicated sales and sourcing options."
+        intro="SCD American Vehicles (SCD), our specialist right-hand-drive conversion partner, supports Betts Works in bringing selected American vehicles to Australian roads through a clear sales, sourcing and conversion pathway."
       />
 
       <section className="section shell">

@@ -8,16 +8,22 @@ type CardVehicle = Vehicle & { images?: Array<{ storageKey: string; altText: str
 
 export function VehicleCard({ vehicle }: { vehicle: CardVehicle }) {
   return (
-    <article className="vehicle-card">
-      <Link href={`/vehicles/${vehicle.slug}`} aria-label={`View ${vehicle.year} ${vehicle.make} ${vehicle.model}`} className="vehicle-media-link"><VehicleMedia vehicle={vehicle} image={vehicle.images?.[0]} /></Link>
+    <Link href={`/vehicles/${vehicle.slug}`} aria-label={`View ${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.variant}`} className="vehicle-card">
+      <span className="vehicle-media-link"><VehicleMedia vehicle={vehicle} image={vehicle.images?.[0]} /></span>
       <div className="vehicle-card-body">
         <div className="card-kicker"><StatusBadge status={vehicle.availabilityStatus} /><span>{vehicle.stockNumber}</span></div>
-        <h3><Link href={`/vehicles/${vehicle.slug}`}>{vehicle.year} {vehicle.make} {vehicle.model}</Link></h3>
+        <h3>{vehicle.year} {vehicle.make} {vehicle.model}</h3>
         <p className="variant">{vehicle.variant}</p>
         {vehicle.isSample && <p className="sample-notice">Demonstration listing only — not genuine stock.</p>}
-        <dl className="quick-specs"><div><dt>Odometer</dt><dd>{formatKm(vehicle.odometerKm)}</dd></div><div><dt>Drivetrain</dt><dd>{vehicle.drivetrain || "Confirm"}</dd></div></dl>
-        <div className="card-price"><div><strong>{vehicle.priceDisplay}</strong><small>{vehicle.priceQualifier}</small></div><Link href={`/vehicles/${vehicle.slug}`} className="text-link">View vehicle <span aria-hidden="true">→</span></Link></div>
+        <dl className="quick-specs">
+          <div><dt>Engine / fuel</dt><dd>{vehicle.engine || vehicle.fuelType || "Confirm"}</dd></div>
+          <div><dt>Transmission</dt><dd>{vehicle.transmission || "Confirm"}</dd></div>
+          <div><dt>Odometer</dt><dd>{formatKm(vehicle.odometerKm)}</dd></div>
+          <div><dt>Drivetrain</dt><dd>{vehicle.drivetrain || "Confirm"}</dd></div>
+          {vehicle.exteriorColour && <div><dt>Exterior</dt><dd>{vehicle.exteriorColour}</dd></div>}
+        </dl>
+        <div className="card-price"><div><strong>{vehicle.priceDisplay}</strong><small>Excl. govt charges &amp; on-road costs*</small></div><span className="text-link">View vehicle <span aria-hidden="true">→</span></span></div>
       </div>
-    </article>
+    </Link>
   );
 }

@@ -5,6 +5,7 @@ import { PublicShell } from "@/app/components/PublicShell";
 import { StatusBadge } from "@/app/components/StatusBadge";
 import { VehicleGallery } from "@/app/components/VehicleGallery";
 import { VehicleCard } from "@/app/components/VehicleCard";
+import { PriceFootnote } from "@/app/components/PriceFootnote";
 import { EnquiryForm } from "@/app/components/EnquiryForm";
 import { getPublicVehicle, listRelatedVehicles } from "@/lib/data";
 import { formatKm } from "@/lib/validation";
@@ -126,11 +127,11 @@ export default async function VehiclePage({ params }: Props) {
             <StatusBadge status={v.availabilityStatus} />
             <h1>{v.year} {v.make} {v.model}</h1>
             <p className="variant">{v.variant}</p>
+            <p className="source-role">SCD American Vehicles (SCD), our specialist right-hand-drive conversion partner, imports, converts and holds this exact vehicle. Betts Works is the dealer.</p>
             <p>{v.headline}</p>
-            <p className="source-role">SCD Direct imports, converts and holds this exact vehicle. Betts Works is the dealer.</p>
             <div className="detail-price"><strong>{v.priceDisplay}</strong><span>{v.priceQualifier}</span></div>
             <p className="cost-guidance">Government charges, registration, insurance, delivery and other on-road costs are confirmed in a written quote. Finance options or third-party introductions can be discussed on enquiry and remain subject to provider assessment.</p>
-            <div className="detail-actions"><a className="button" href="#enquire">Enquire about this vehicle →</a><Link className="button button-secondary" href="/contact">Contact Betts Works</Link></div>
+            <div className="detail-actions"><a className="button" href="#enquire">Enquire about this vehicle →</a><Link className="button button-secondary" href="/contact">Contact Betts Works →</Link></div>
           </aside>
         </div>
         <section className="spec-section">
@@ -149,7 +150,7 @@ export default async function VehiclePage({ params }: Props) {
         <section id="enquire" className="spec-section">
           <div className="contact-layout"><div><p className="eyebrow">Vehicle enquiry</p><h2 className="enquiry-heading">Let’s talk about this vehicle.</h2><p className="muted">Your enquiry goes to Betts Works as the selling dealer.</p></div><EnquiryForm vehicleId={v.id} vehicleLabel={label} sourcePage={`/vehicles/${v.slug}`} /></div>
         </section>
-        {related.length > 0 && <section className="spec-section"><div className="section-heading"><h2>Related available vehicles</h2><Link className="text-link" href="/stock">All stock →</Link></div><div className="vehicle-grid">{related.map((item) => <VehicleCard key={item.id} vehicle={item} />)}</div></section>}
+        {related.length > 0 && <section className="spec-section"><div className="section-heading"><h2>Related available vehicles</h2><Link className="text-link" href="/stock">All stock →</Link></div><div className="vehicle-grid">{related.map((item) => <VehicleCard key={item.id} vehicle={item} />)}</div><PriceFootnote /></section>}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
       </section>
     </PublicShell>

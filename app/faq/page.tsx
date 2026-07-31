@@ -4,12 +4,12 @@ import { PublicShell } from "@/app/components/PublicShell";
 
 export const metadata: Metadata = {
   title: "Frequently asked questions",
-  description: "Answers about Betts Works vehicle sales, overseas sourcing, SCD conversion, availability, pricing and enquiries.",
+  description: "Answers about Betts Works vehicle sales, overseas sourcing, specialist conversion, availability, pricing and enquiries.",
   alternates: { canonical: "/faq" },
 };
 
 const faqs = [
-  ["What vehicles does Betts Works sell?", "Betts Works advertises selected vehicles supplied by SCD and may also purchase and hold vehicles as dealership inventory. Each listing identifies the relevant vehicle, specifications, availability and selling dealer."],
+  ["What vehicles does Betts Works sell?", "Betts Works advertises selected vehicles supplied by SCD American Vehicles (SCD), our specialist right-hand-drive conversion partner, and may also purchase and hold vehicles as dealership inventory. Each listing identifies the relevant vehicle, specifications, availability and selling dealer."],
   ["Can Betts Works source a specific vehicle for me?", "Yes. Tell us the make, model, year, specification, colour and features you want. Betts Works can use its industry knowledge and supplier network to search overseas for a suitable vehicle."],
   ["Who performs the Australian conversion?", "Vehicles requiring Australian conversion are entrusted to SCD, which is responsible for the professional right-hand-drive conversion and applicable Australian compliance work."],
   ["Does Betts Works perform conversion work?", "Betts Works is the dealer and your primary point of contact. Director Tyson Betts also works hands-on within SCD’s conversion operation, manufacturing and completing dashboard components used in the conversion process."],

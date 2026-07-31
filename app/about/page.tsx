@@ -26,7 +26,7 @@ export default function AboutPage() {
             <p className="eyebrow">Built on hands-on experience</p>
             <h2>Knowledge from sourcing through to delivery.</h2>
             <p>With five years of hands-on experience in the American vehicle conversion industry, director Tyson Betts understands the process behind every vehicle—from overseas sourcing and selection through to conversion and final delivery.</p>
-            <p>Vehicles sourced by Betts Works are entrusted to SCD American Vehicles for professional Australian conversion. Tyson also works directly within SCD’s conversion operation, manufacturing and completing dashboard components used throughout the conversion process.</p>
+            <p>Vehicles sourced by Betts Works are entrusted to SCD American Vehicles (SCD), our specialist right-hand-drive conversion partner, for professional Australian conversion. Tyson also works directly within SCD’s conversion operation, manufacturing and completing dashboard components used throughout the conversion process.</p>
             <p>This combination of dealership service and genuine conversion-industry experience gives customers one knowledgeable point of contact throughout their vehicle journey.</p>
           </div>
           <div className="relationship-mark relationship-mark-logo about-logo">

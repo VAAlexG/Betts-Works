@@ -8,22 +8,21 @@ export const siteConfig = {
   emailDisplay: "tyson@bettsworks.com.au",
   emailHref: "mailto:tyson@bettsworks.com.au",
   location: "110 Dales Road, Kobble Creek QLD 4520",
-  hours: "By appointment — contact to arrange",
+  hours: "By appointment — contact us to arrange a viewing",
   legalEntity: "Tyson Jade Betts trading as Betts Works",
   abn: "37 195 578 714",
-  motorDealerLicence: "Pending confirmation",
+  motorDealerLicence: "TODO — add QLD motor dealer licence number",
   latitude: -27.2525064,
   longitude: 152.8149758,
-  relationship: "Betts Works advertises selected vehicles supplied by SCD, may purchase and hold vehicles as dealership inventory, and can source a specific vehicle overseas for a customer. Vehicles requiring Australian conversion are entrusted to SCD for professional right-hand-drive conversion and applicable Australian compliance work.",
+  relationship: "Betts Works advertises selected vehicles supplied by SCD American Vehicles (SCD), our specialist right-hand-drive conversion partner, may purchase and hold vehicles as dealership inventory, and can source a specific vehicle overseas for a customer. Vehicles requiring Australian conversion are entrusted to SCD for professional right-hand-drive conversion and applicable Australian compliance work.",
   scdUrl: "https://scddirect.com.au/",
 } as const;
 
 export const navigation = [
   { href: "/stock", label: "Current Stock" },
   { href: "/about", label: "About" },
-  { href: "/scd-direct", label: "SCD Direct & Conversion" },
+  { href: "/scd-direct", label: "Specialist Conversion" },
   { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
 ] as const;
 
 export const statuses = {

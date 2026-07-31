@@ -11,14 +11,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/stock" },
 };
 
-export default async function StockPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
-  const { page } = await searchParams;
-  const initialPage = Math.min(100, Math.max(1, Number.parseInt(page || "1", 10) || 1));
-  const vehicles = await listPublicVehicles();
+export default async function StockPage() {
+  const vehicles = await listPublicVehicles({ includeSold: true });
   return (
     <PublicShell>
       <PageHero eyebrow="American vehicle inventory" title="Current stock" intro="Browse vehicles currently advertised through Betts Works. Each listing identifies the vehicle, specifications, availability and selling dealer. Availability remains subject to confirmation." />
-      <section className="section shell"><StockBrowser vehicles={vehicles} initialPage={initialPage} /></section>
+      <section className="section shell"><StockBrowser vehicles={vehicles} /></section>
     </PublicShell>
   );
 }

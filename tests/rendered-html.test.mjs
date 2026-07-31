@@ -35,19 +35,38 @@ test("server-renders the finished Betts Works homepage", async () => {
   const html = await response.text();
   assert.match(html, /American trucks\./);
   assert.match(html, /Australian roads\./);
-  assert.match(html, /SCD Direct/);
+  assert.match(html, /SCD American Vehicles \(SCD\).*specialist right-hand-drive conversion partner/);
   assert.match(html, /Independent Australian vehicle dealer/i);
-  assert.match(html, /Personalised vehicle sourcing/i);
+  assert.match(html, /Right-hand-drive converted/i);
+  assert.match(html, /ADR compliant/i);
+  assert.match(html, /Sourced to your spec/i);
+  assert.match(html, /View current stock/);
+  assert.match(html, /Make an enquiry/);
+  assert.doesNotMatch(html, /How the specialist pathway works/);
+  assert.match(html, /You choose/);
+  assert.match(html, /We source &amp; sell/);
+  assert.match(html, /SCD converts &amp; complies/);
+  assert.match(html, /You drive/);
+  assert.match(html, /Customer stories/);
   assert.match(html, /2025 Ford F350 Lariat/i);
   assert.match(html, /\$259,000/);
-    assert.match(html, /\/brand\/betts-works-logo\.png/);
-    assert.match(html, /brand-approved-logo/);
+  assert.match(html, /Engine \/ fuel/);
+  assert.match(html, /Transmission/);
+  assert.match(html, /Excl\. govt charges &amp; on-road costs\*/);
+  assert.match(html, /Unless expressly stated as drive-away/);
+  assert.match(html, /\/brand\/betts-works-logo\.png/);
+  assert.match(html, /brand-approved-logo/);
+  assert.match(html, /American vehicle imports/i);
   assert.match(html, /https:\/\/bettsworks\.com\.au\/og\.png/);
   assert.match(html, /https:\/\/bettsworks\.com\.au\/?/);
   assert.doesNotMatch(html, /localhost/i);
   assert.match(html, /"@type":"AutoDealer"/);
   assert.match(html, /37 195 578 714/);
+  assert.match(html, /TODO.*QLD motor dealer licence number/);
+  assert.match(html, /By appointment.*contact us to arrange a viewing/);
+  assert.doesNotMatch(html, /pending approval|Pending confirmation/i);
   assert.doesNotMatch(html, /href="\/admin"/);
+  assert.doesNotMatch(html, /View stock.*↗/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
@@ -101,8 +120,12 @@ test("publishes crawl controls and vehicle structured data", async () => {
   assert.match(vehicle, /"priceCurrency":"AUD"/);
   assert.match(vehicle, /Enlarge photo 1 of \d+/);
   assert.match(vehicle, /aria-haspopup="dialog"/);
-  const pagedStock = await (await fetch(`${origin}/stock?page=2`)).text();
-  assert.match(pagedStock, /Load more vehicles|vehicle-card/);
+  const stock = await (await fetch(`${origin}/stock`)).text();
+  assert.match(stock, /Model \/ trim/);
+  assert.match(stock, /Minimum price/);
+  assert.match(stock, /Maximum price/);
+  assert.match(stock, /Showing available stock/);
+  assert.doesNotMatch(stock, /Load more vehicles/);
 });
 
 test("issues a same-origin CSRF cookie and rejects an unprotected enquiry", async () => {
