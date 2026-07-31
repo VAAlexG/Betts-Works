@@ -2,16 +2,34 @@ import type { Metadata } from "next";
 import { PageHero } from "@/app/components/PageHero";
 import { PublicShell } from "@/app/components/PublicShell";
 
-export const metadata:Metadata={title:"Frequently asked questions",description:"Answers about Betts Works stock, SCD Direct conversion, availability, pricing and enquiries.",alternates:{canonical:"/faq"}};
-const faqs=[
-  ["Is Betts Works the importer or conversion provider?","No. Betts Works is the dealer. Every listed vehicle is imported, converted and held by SCD Direct."],
-  ["Does Betts Works perform right-hand-drive conversions?","No. Right-hand-drive conversion work is provided through SCD Direct. The conversion provider and status should be recorded on each vehicle listing."],
-  ["Does every vehicle meet Australian compliance requirements?","A vehicle’s compliance status is shown only when verified in its inventory record. Ask Betts Works to confirm the current status before purchase."],
-  ["Are these the same vehicles shown by SCD Direct?","Yes. Betts Works lists the exact SCD Direct inventory vehicles, using the matching stock number, images, price basis and vehicle details. SCD Direct physically holds the vehicles."],
-  ["Are all advertised vehicles available?","The site mirrors SCD Direct’s current stock catalogue, but availability can change. Confirm the current status with Betts Works before making a purchase decision."],
-  ["What does POA mean?","Price on application. Contact Betts Works for current pricing and the applicable price basis."],
-  ["Are prices drive-away?","Only a listing explicitly approved and stored as drive-away should use that wording. Otherwise the price qualifier explains the basis, such as excluding on-road costs or POA."],
-  ["What warranty applies?","Warranty information has not yet been approved. Ask Betts Works for vehicle-specific written details. Nothing on this website limits rights under the Australian Consumer Law."],
-  ["How do I enquire?","Open a vehicle and use its linked form, or use the general contact page. Valid enquiries are stored securely before email notification is attempted."],
+export const metadata: Metadata = {
+  title: "Frequently asked questions",
+  description: "Answers about Betts Works vehicle sales, overseas sourcing, SCD conversion, availability, pricing and enquiries.",
+  alternates: { canonical: "/faq" },
+};
+
+const faqs = [
+  ["What vehicles does Betts Works sell?", "Betts Works advertises selected vehicles supplied by SCD and may also purchase and hold vehicles as dealership inventory. Each listing identifies the relevant vehicle, specifications, availability and selling dealer."],
+  ["Can Betts Works source a specific vehicle for me?", "Yes. Tell us the make, model, year, specification, colour and features you want. Betts Works can use its industry knowledge and supplier network to search overseas for a suitable vehicle."],
+  ["Who performs the Australian conversion?", "Vehicles requiring Australian conversion are entrusted to SCD, which is responsible for the professional right-hand-drive conversion and applicable Australian compliance work."],
+  ["Does Betts Works perform conversion work?", "Betts Works is the dealer and your primary point of contact. Director Tyson Betts also works hands-on within SCD’s conversion operation, manufacturing and completing dashboard components used in the conversion process."],
+  ["Are SCD-supplied vehicles also available through SCD?", "They may be. SCD continues to advertise and sell its own stock directly, so availability of an SCD-supplied vehicle remains subject to confirmation."],
+  ["Does every vehicle meet Australian compliance requirements?", "A vehicle’s compliance status is shown only when verified in its inventory record. Ask Betts Works to confirm the current status and applicable conversion or compliance pathway before purchase."],
+  ["What does POA mean?", "Price on application. Contact Betts Works for current pricing and the applicable price basis."],
+  ["Are prices drive-away?", "Only a listing explicitly described as drive-away should use that wording. Otherwise, the price qualifier explains the basis, such as excluding on-road costs or POA."],
+  ["What warranty applies?", "Ask Betts Works for the written warranty details applicable to the specific vehicle. Nothing on this website limits rights under the Australian Consumer Law."],
+  ["How do I enquire?", "Open a vehicle and use its linked form, or use the general contact page. Include the stock number for an advertised vehicle, or describe the vehicle you would like us to source."],
 ];
-export default function FAQPage(){return <PublicShell><PageHero eyebrow="Useful answers" title="Frequently asked questions" intro="Clear answers based on the current approved operating model. Vehicle-specific details should always be confirmed before purchase."/><section className="section shell"><div className="faq-list">{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></section></PublicShell>}
+
+export default function FAQPage() {
+  return (
+    <PublicShell>
+      <PageHero eyebrow="Useful answers" title="Frequently asked questions" intro="Clear answers about vehicle sales, sourcing and the specialist Australian conversion pathway." />
+      <section className="section shell">
+        <div className="faq-list">
+          {faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}
+        </div>
+      </section>
+    </PublicShell>
+  );
+}

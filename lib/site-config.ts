@@ -1,15 +1,15 @@
 export const siteConfig = {
   name: "Betts Works",
   title: "Betts Works | American vehicle dealer in Australia",
-  description: "Browse the exact American vehicles imported, converted and held by SCD Direct, offered for sale by Betts Works as the dealer.",
+  description: "Browse American vehicles for sale through Betts Works or ask us to source the make, model and specification you want.",
   url: process.env.PUBLIC_SITE_URL || "http://localhost:3000",
-  phoneDisplay: "Phone pending approval",
-  phoneHref: "",
-  emailDisplay: "Sales email pending approval",
-  emailHref: "",
-  location: "Dealership location pending approval",
+  phoneDisplay: "0451 461 705",
+  phoneHref: "tel:+61451461705",
+  emailDisplay: "tyson@bettsworks.com.au",
+  emailHref: "mailto:tyson@bettsworks.com.au",
+  location: "110 Dales Road, Kobble Creek QLD 4520",
   hours: "Trading hours pending approval",
-  relationship: "Every vehicle offered by Betts Works is imported, converted and held by SCD Direct. SCD Direct is responsible for the American vehicle importation, right-hand-drive conversion and Australian compliance pathway. Betts Works is the dealer responsible for advertising and selling the exact vehicles shown.",
+  relationship: "Betts Works advertises selected vehicles supplied by SCD, may purchase and hold vehicles as dealership inventory, and can source a specific vehicle overseas for a customer. Vehicles requiring Australian conversion are entrusted to SCD for professional right-hand-drive conversion and applicable Australian compliance work.",
   scdUrl: "https://scddirect.com.au/",
 } as const;
 

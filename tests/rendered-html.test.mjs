@@ -37,10 +37,11 @@ test("server-renders the finished Betts Works homepage", async () => {
   assert.match(html, /Australian roads\./);
   assert.match(html, /SCD Direct/);
   assert.match(html, /Independent Australian vehicle dealer/i);
-  assert.match(html, /Exact SCD Direct stock/i);
+  assert.match(html, /Personalised vehicle sourcing/i);
   assert.match(html, /2025 Ford F350 Lariat/i);
   assert.match(html, /\$259,000/);
   assert.match(html, /\/brand\/bw-hex-dark\.png/);
+  assert.match(html, /\/brand\/betts-works-logo\.png/);
   assert.doesNotMatch(html, /_vinext\/image/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
@@ -54,9 +55,12 @@ test("protects admin indexing and browser surfaces", async () => {
   assert.match(await response.text(), /Administrator sign-in required|Protected administration/);
 });
 
-test("renders legal drafts as unapproved", async () => {
+test("renders the approved privacy policy with pending business placeholders", async () => {
   const response = await fetch(`${origin}/privacy`);
   const html = await response.text();
-  assert.match(html, /Draft for business\/legal review/);
-  assert.match(html, /Privacy contact details are pending business approval/);
+  assert.equal(response.status, 200);
+  assert.match(html, /Effective 28 July 2026/);
+  assert.match(html, /Privacy Act 1988/);
+  assert.match(html, /tyson@bettsworks\.com\.au/);
+  assert.match(html, /\[Insert ABN\]/);
 });
