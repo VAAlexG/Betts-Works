@@ -74,7 +74,6 @@ export default function AboutPage() {
           <dl className="compliance-panel">
             <div><dt>Legal entity</dt><dd>{siteConfig.legalEntity}</dd></div>
             <div><dt>ABN</dt><dd>{siteConfig.abn}</dd></div>
-            <div><dt>QLD motor dealer licence</dt><dd>{siteConfig.motorDealerLicence}</dd></div>
             <div><dt>Trading hours</dt><dd>{siteConfig.hours}</dd></div>
           </dl>
         </div>

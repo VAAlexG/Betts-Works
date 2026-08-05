@@ -22,16 +22,10 @@ export default async function Home() {
     priceRange: "$$$",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "110 Dales Road",
-      addressLocality: "Kobble Creek",
+      addressLocality: "Brendale",
       addressRegion: "QLD",
-      postalCode: "4520",
+      postalCode: "4500",
       addressCountry: "AU",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: siteConfig.latitude,
-      longitude: siteConfig.longitude,
     },
     openingHours: "By appointment",
     areaServed: { "@type": "Country", name: "Australia" },

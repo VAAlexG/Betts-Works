@@ -62,7 +62,8 @@ test("server-renders the finished Betts Works homepage", async () => {
   assert.doesNotMatch(html, /localhost/i);
   assert.match(html, /"@type":"AutoDealer"/);
   assert.match(html, /37 195 578 714/);
-  assert.match(html, /TODO.*QLD motor dealer licence number/);
+  assert.match(html, /Brendale QLD 4500/);
+  assert.doesNotMatch(html, /motor dealer licence|dealer licence/i);
   assert.match(html, /By appointment.*contact us to arrange a viewing/);
   assert.doesNotMatch(html, /pending approval|Pending confirmation/i);
   assert.doesNotMatch(html, /href="\/admin"/);

@@ -13,7 +13,6 @@ export function Footer() {
       </div>
       <div className="footer-compliance shell" aria-label="Business and compliance details">
         <span><b>ABN</b> {siteConfig.abn}</span>
-        <span><b>QLD motor dealer licence</b> {siteConfig.motorDealerLicence}</span>
         <span><b>Trading</b> {siteConfig.hours}</span>
       </div>
       <div className="analytics-notice shell"><span>This site uses essential security storage and privacy-focused, cookieless Cloudflare Web Analytics. No advertising or marketing cookies are used.</span><Link href="/privacy">Privacy details</Link></div>

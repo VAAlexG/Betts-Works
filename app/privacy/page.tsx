@@ -198,7 +198,7 @@ export default function PrivacyPage() {
             <strong>Betts Works</strong>
             <span>Legal entity: Tyson Jade Betts trading as Betts Works</span>
             <span>ABN: 37 195 578 714</span>
-            <span>110 Dales Road, Kobble Creek QLD 4520</span>
+            <span>Brendale QLD 4500</span>
             <a href="mailto:tyson@bettsworks.com.au">tyson@bettsworks.com.au</a>
             <a href="tel:+61451461705">0451 461 705</a>
             <a href="https://bettsworks.com.au">bettsworks.com.au</a>
